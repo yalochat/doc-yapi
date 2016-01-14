@@ -1,0 +1,23 @@
+{
+  "name": "doc-yapi",
+  "version": "0.9.0",
+  "description": "Yalo's API documentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yalochat/doc-yapi.git"
+  },
+  "author": "x0y <x0y@milkyweb.co>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yalochat/doc-yapi/issues"
+  },
+  "homepage": "https://github.com/yalochat/doc-yapi#readme",
+  "dependencies": {
+    "api-mock": "^0.2.2",
+    "hercule": "^2.0.4"
+  }
+}
