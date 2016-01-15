@@ -3,4 +3,4 @@ Yalo's api documentation
 
 ## Requirements
 
-- Install [apiary cli](https://docs.apiary.io/tools/apiary-cli
+- Install [apiary cli](https://docs.apiary.io/tools/apiary-cli)
