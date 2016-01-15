@@ -7,6 +7,7 @@ The categories collection allows to get all the available categories in a given 
 
 + Parameters
     :[cc parameter](parameters.md countryCode:)
+    + location (optional) - This is a geographic coordinate in the format "latitude,longitude", works like a filter to show only the categories that have stores near the given geographic coordinate.
 
 ### Get Categories [GET]
 
@@ -15,84 +16,55 @@ The categories collection allows to get all the available categories in a given 
         {
             "total": 2,
             "_links": {
-                "self": {"href":"http://api.ayalo.co/v1/mx/categories"}
+                "self": {"href":"http://api.yalochat.com/mx/categories?location=19.414980271831,-99.177446197718"}
             },
             "_embedded": {
                 "categories": [
                     {
-                        "id": "electronicos" ,
-                        "name": "Electronicos",
-                        "photo": "http://img.ayalo.co/electronicos.png",
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/v1/mx/categories/electronicos"}
+                        "id": "restaurantes" ,
+                        "name": "Restaurantes",
+                        images: {
+                            logo: "https://storage.googleapis.com/yalo-img/categories/logo_restaurantes.png",
+                            icon: "https://storage.googleapis.com/yalo-img/categories/icon_restaurantes.png",
+                            pin: "https://storage.googleapis.com/yalo-img/categories/pin_restaurantes.png",
+                            photo: "https://storage.googleapis.com/yalo-img/categories/cat_restaurantes.jpg"
+                        },
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/categories/restaurantes?location=19.414980271831,-99.177446197718"
+                            },
+                            stores: {
+                                href: "http://api.yalochat.com/mx/stores?location=19.414980271831,-99.177446197718&category=restaurantes"
+                            }
                         },
                         "_embedded": {
                             "stores": {
-                                "total": 3,
-                                "_links": {"href":"http://api.yalo.co/v1/mx/stores"},
-                                "_embedded": {
-                                    "stores":[{
-                                        "id": "best-buy-satelite",
-                                        "name": "Best Buy Satelite",
-                                        "description": "Compañía que ofrece productos electronicos",
-                                        "logo": "http://yalo.co/logo-best-buy.png"
-                                    },{
-                                        "id": "walmart-satelite",
-                                        "name": "Walmart Satelite",
-                                        "description": "Cadena de supermercados mas grande del mundo",
-                                        "logo": "http://yalo.co/walmart-buy.png"
-                                    }]
-                                }    
+                                "total": 121
                             }
                         }
                     },{
-                        "id": "farmacia" ,
-                        "name": "Farmacia",
-                        "photo": "http://img.ayalo.co/farmacia.png",
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/v1/mx/categories/farmacia"}
+                        id: "cafes",
+                        name: "Cafes",
+                        images: {
+                            logo: "https://storage.googleapis.com/yalo-img/categories/logo_bebidas.png",
+                            icon: "https://storage.googleapis.com/yalo-img/categories/icon_cafes.png",
+                            pin: "https://storage.googleapis.com/yalo-img/categories/pin_cafes.png",
+                            photo: "https://storage.googleapis.com/yalo-img/categories/cat_cafes.jpg"
                         },
-                        "_embedded": {
-                            "stores": {
-                                "total": 3,
-                                "_links": {"href":"http://api.yalo.co/v1/mx/stores"},
-                                "_embedded": {
-                                    "stores":[{
-                                        "id": "walmart-satelite",
-                                        "name": "Walmart Satelite",
-                                        "description": "Cadena de supermercados mas grande del mundo",
-                                        "logo": "http://yalo.co/walmart-buy.png"
-                                    }]
-                                }    
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/categories/cafes?location=19.414980271831,-99.177446197718"
+                            },
+                            stores: {
+                                href: "http://api.yalochat.com/mx/stores?location=19.414980271831,-99.177446197718&category=cafes"
+                            }
+                        },
+                        _embedded: {
+                            stores: {
+                                total: 33
                             }
                         }
                     }
                 ]
-            }
-        }
-
-
-## Category [/{cc}/categories/{categoryId}]
-To get details of a specific category just provide the category id.
-
-+ Parameters
-    :[cc parameter](parameters.md countryCode:)
-    + categoryId: `electronicos` (required, string) - The category id is unique identifier
-
-### Get Category [GET]
-
-+ Response 200 (application/hal+json)
-
-        {
-            "id": "electronicos" ,
-            "name": "Electronicos",
-            "photo": "http://img.ayalo.co/electronicos.png",
-            "_links": {
-                "self": {"href":"http://api.yalo.co/v1/mx/categories/electronicos"}
-            },
-            "_embedded": {
-                "stores": {
-                    "_links": {"href":"http://api.yalo.co/v1/mx/stores"}
-                }
             }
         }
