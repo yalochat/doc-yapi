@@ -2,23 +2,13 @@
 # Group Status
 
 ## Status endpoint [/status]
-With this endpoint your are able to know if all the services needed to run the API are working properly.
+With this endpoint your are able to know if the service is up and the name and version of the service.
 
 ### Get Status [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "country": "gt",
-                "query-service":"OK",
-                "polices-service":"OK",
-                "auth-service":"OK"
-            },
-            {
-                "country": "mx",
-                "query-service":"OK",
-                "polices-service":"OK",
-                "auth-service":"OK"
-            }
-        ]
+        {
+            name: "yapi",
+            version: "1.0.0-beta.3"
+        }

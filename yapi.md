@@ -23,7 +23,7 @@ The API is based in the idea that each resource or collection is stored in a spe
 
 :[Query Collection](query_collection.md)
 
-<!-- :[Group Status](groups/status.md) -->
+:[Group Status](groups/status.md)
 
 :[Group Location](groups/location.md)
 
