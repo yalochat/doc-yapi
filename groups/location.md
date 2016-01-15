@@ -9,7 +9,7 @@ This receives a geographic coordinate and try to return a human readable address
 
 + Parameters
     :[cc parameter](parameters.md countryCode:)
-    + location (required) - This a geographic coordinate in the format "latitude,longitude", for example, location=19.454886,-99.1758911
+    + location (required) - This is a geographic coordinate in the format "latitude,longitude", for example, location=19.454886,-99.1758911
 
 ### Get  [GET]
 
