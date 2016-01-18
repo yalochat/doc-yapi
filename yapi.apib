@@ -10,30 +10,23 @@ To familiarize with yAPI, you can browse through all this detail documentation.
 This document was build ussing a cookbook style and will guide you through the most common and simple query tasks to yAPI expert.
 It's designed to start from the basics and slowly increase sophisticated concepts until you know everything there is to know about querying over yAPI.
 
-These guides are written in Markdown and are available on our private git [repo](ayalo.bitbucket.org). If there is something missing, or you find a typo or mistake, please help us by filing an issue or submitting a pull request. Thanks!
+These guides are written in Markdown and are available on our [github repo](https://github.com/yalochat/doc-yapi). If there is something missing, or you find a typo or mistake, please help us by filling an issue or submitting a pull request. Thanks!
 
 # Overview
 
 yAPI is designed and optimized for queries over a just few core business objects or resources.
-The yAPI search engine provides the power of a speed search with a sophisticated, developer-friendly query language.
 
-Through yAPI it's possible to access Ayalo locations, stores, products, categories and others.
+Through yAPI it's possible to access Yalo locations, stores, products, categories and others.
 The API is based in the idea that each resource or collection is stored in a specific path where it's possible to do filtering and search.
 
-For example, pay attention to the next URL.
-`api.ayalo.co/v1/mx/stores/df/satelite/`
-This path represent all the stores that are physically located at Mexico, Distrito Federal region , Satelite city.
 
-FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+# Authentication and Authorization
 
-#Authentication and Authorization
-
-yAPI uses OAuth2 to to allow authenticated access to private resources and business objects.
+yAPI uses OAuth2 to allow authenticated access to private resources and business objects.
 
 OAuth2 is a protocol that lets external apps request authorization to private details in a Yalo user’s account without getting their password. This is preferred over Basic Authentication because tokens can be limited to specific types of data, and can be revoked by users at any time.
 
-All Yalo internal and extenal applications need to register their application before getting started. A registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared.
+All Yalo internal and external applications need to register their application before getting started. A registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared.
 
 ## Terms to know
 
@@ -56,7 +49,7 @@ Gives the app permission to retrieve an access token on behalf of the end user. 
 A long string of characters that serves as a credential used to access protected resources.
 
 ### Protected resource
-Data owned by the resource owner. For example, the user's contact list, account information, or other sensitive data. 
+Data owned by the resource owner. For example, the user's contact list, account information, or other sensitive data.
 
 ## Anonymous request
  yAPI supports anonymous request to some of the resources, for example you may list the countries available.
@@ -65,8 +58,8 @@ Data owned by the resource owner. For example, the user's contact list, account 
 Scopes limit access for OAuth tokens providing a way to limit the amount of access that is granted to an access token.For example, an access token issued to a client app may be granted READ and WRITE access to protected resource as chat conversations or user profile data, or just READ. Scopes do not grant any additional permission beyond that which the user already has.
 
 
-
 ## Yalo OAuth protocol flows
+
 ### Resource owner grant type
 The resource owner password grant type is used in our trusted internal applications.  In this configuration, the user provides his resource server credentials (username/password) to the client app, which sends them in the request, the server validates the credentials, and if they are valid, proceeds to generate an access token and returns it.
 
@@ -91,16 +84,16 @@ To signup new a user you can use the same endpoint for user signing. The only di
      + grantType: `password` (String, required) - The grant to be executed
      + nonce: `e7fzVtooU7U7Bx4HMliusVZVJj6VDkJaxrRi0yMN1mpcsmJCdDTtKUvBI02_0n_eahk9t9HIqLQ_ShLZ3IIBAQ` (String, optional) - Provide a nonce to also generate a chat session token.
      + chatToken: `true` (String, optional) - Provide this param if a nonce is not include and you want to get a chat session token.
-        + Default: `false`
+     + Default: `false`
 
-+ Request Singin a user (application/json)
++ Request Signin a user (application/json)
 
     + Headers
 
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"1234",
@@ -114,18 +107,18 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
-              "statusCode": 201,
-              "user": {
-                "email": "fabia@ayalo.com"
-              },
-              "type": "bearer",
-              "token": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
-              "expiresIn": 3600,
-              "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
+                "statusCode": 201,
+                "user": {
+                    "email": "fabia@ayalo.com"
+                },
+                "type": "bearer",
+                "token": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
+                "expiresIn": 3600,
+                "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
             }
-            
+
 + Request Sign in a user with nonce an request a chat identity token (application/json)
 
     + Headers
@@ -133,7 +126,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"1234",
@@ -148,7 +141,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "statusCode": 200,
                 "user": {
@@ -161,7 +154,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
                     "identityToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImN0eSI6ImxheWVyLWVpdDt2PTEiLCJraWQiOiJsYXllcjovLy9rZXlzL2ZhNjk3M2ZlLTY5NjUtMTFlNS1hODc3LWNlMjQwMjAwNTEyYSJ9.eyJpc3MiOiJsYXllcjovLy9wcm92aWRlcnMvYmVjODhmM2EtNjI2NS0xMWU1LWJjN2UtMGVkZmZlMDA3ODhmIiwicHJuIjoiZnJlZEBheWFsby5jbyIsImlhdCI6MTQ0ODEzMjk0NywiZXhwIjoxNDQ4MTQyOTQ3LCJuY2UiOiJ4NUpSMlNYTHZyZ0VrVjQxemtRUmN2SzYwVTFETTh4Nm02SHo4N2hQVU04aUYxZVo1QWpNV3Eta0ZiNzRwd0xoUHotTVRqWXhEbEVpazl3dEFDZlRNQSJ9.M61nHOa83wnCpFD14vqJPOU8TrglnsMb3M95R8KjSd2c0jHE9A9nNa_eahI0CvJ4SsvsMGxGwSyE94vFPNCxQTrmNb2jKnK4apQPQMs7_6jLArqps78kWI7IVFdXE-C8zRM3-jA3fJQiCCQeo9VFoD0SLrMFiiy3n23y3gZ4b04"
                 }
             }    
-            
+
 
 + Request Sign in a user with chat session token parameter true and nonce to get a `sessionToken` and `identityToken` (application/json)
 
@@ -170,7 +163,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"1234",
@@ -186,7 +179,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "statusCode": 200,
                 "user": {
@@ -208,7 +201,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"1234",
@@ -223,19 +216,19 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
-              "user": {
-                "email": "fabia@ayalo.com"
-              },
-              "tokenType": "bearer",
-              "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
-              "expiresIn": 3600,
-              "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
-              "chat":{
-                "sessionToken":"0bbKLunec_070Ma8_hRHFRUVpz2Bsp9Yz94yRd4EUs50LPBPndjxs5YG5loikeCpUp5WUSYPenUgMO7vPFKqBw.8-4",
-                "identityToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImN0eSI6ImxheWVyLWVpdDt2PTEiLCJraWQiOiJsYXllcjovLy9rZXlzL2ZhNjk3M2ZlLTY5NjUtMTFlNS1hODc3LWNlMjQwMjAwNTEyYSJ9.eyJpc3MiOiJsYXllcjovLy9wcm92aWRlcnMvYmVjODhmM2EtNjI2NS0xMWU1LWJjN2UtMGVkZmZlMDA3ODhmIiwicHJuIjoiZnJlZEBheWFsby5jbyIsImlhdCI6MTQ0ODEzNDMzOCwiZXhwIjoxNDQ4MTQ0MzM4LCJuY2UiOiJ0OGdlVVRMQ1VURUxJemVwQlpTbnBxbjUzRVJwMnRvOTg1WHV6RGRuem9hcmNxbVQ3WHBTSUV0R3ZRaVExRy1vMUg3T0haTXFLZVhEV0xNdmpGeTVzQSJ9.Op_9K953ALli4YNliFqtukOCeajyCuhOaA3XIBqn2DGZx30z1xfwExkyS_pbaijBK48IxqV_YePkWi17MAaFlAmxYSgyKUOABUITN_bcFBVStd3gfUkjQbdxmeo45_rlS7MCUxTwnIZfE5hTgizvzCinOLhCMqHSaVr8ORJ9Yn0"
-              }
+                "user": {
+                    "email": "fabia@ayalo.com"
+                },
+                "tokenType": "bearer",
+                "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
+                "expiresIn": 3600,
+                "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
+                "chat":{
+                    "sessionToken":"0bbKLunec_070Ma8_hRHFRUVpz2Bsp9Yz94yRd4EUs50LPBPndjxs5YG5loikeCpUp5WUSYPenUgMO7vPFKqBw.8-4",
+                    "identityToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImN0eSI6ImxheWVyLWVpdDt2PTEiLCJraWQiOiJsYXllcjovLy9rZXlzL2ZhNjk3M2ZlLTY5NjUtMTFlNS1hODc3LWNlMjQwMjAwNTEyYSJ9.eyJpc3MiOiJsYXllcjovLy9wcm92aWRlcnMvYmVjODhmM2EtNjI2NS0xMWU1LWJjN2UtMGVkZmZlMDA3ODhmIiwicHJuIjoiZnJlZEBheWFsby5jbyIsImlhdCI6MTQ0ODEzNDMzOCwiZXhwIjoxNDQ4MTQ0MzM4LCJuY2UiOiJ0OGdlVVRMQ1VURUxJemVwQlpTbnBxbjUzRVJwMnRvOTg1WHV6RGRuem9hcmNxbVQ3WHBTSUV0R3ZRaVExRy1vMUg3T0haTXFLZVhEV0xNdmpGeTVzQSJ9.Op_9K953ALli4YNliFqtukOCeajyCuhOaA3XIBqn2DGZx30z1xfwExkyS_pbaijBK48IxqV_YePkWi17MAaFlAmxYSgyKUOABUITN_bcFBVStd3gfUkjQbdxmeo45_rlS7MCUxTwnIZfE5hTgizvzCinOLhCMqHSaVr8ORJ9Yn0"
+                }
             }
 
 + Request Singin with invalid password credentials (application/json)
@@ -245,7 +238,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"invalidPassword",
@@ -254,20 +247,21 @@ To signup new a user you can use the same endpoint for user signing. The only di
             }
 
 + Response 401 (application/json)
+
     + Header
-    
+
             WWW-Authenticate: Yalo Error type="user", code="invalidUserCredentials", error="User credentials are invalid"
 
     + Body
-    
+
             {
-              "statusCode": 401,
-              "error": "Unauthorized",
-              "message": "User credentials are invalid",
-              "attributes": {
-                "type": "user",
-                "code": "invalidUserCredentials",
-                "error": "User credentials are invalid"
+                "statusCode": 401,
+                "error": "Unauthorized",
+                "message": "User credentials are invalid",
+                "attributes": {
+                    "type": "user",
+                    "code": "invalidUserCredentials",
+                    "error": "User credentials are invalid"
                 }
             }
 
@@ -278,7 +272,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
                 "username": "fabia@gmail.com",
                 "password":"1234",
@@ -292,19 +286,202 @@ To signup new a user you can use the same endpoint for user signing. The only di
             Authorization: Basic dG90bzplZHdhc2Fh
 
     + Body
-    
+
             {
-              "statusCode": 201,
-              "user": {
-                "email": "fabia@ayalo.com",
-              },
-              "tokenType": "bearer",
-              "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
-              "expiresIn": 3600,
-              "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
+                "statusCode": 201,
+                "user": {
+                    "email": "fabia@ayalo.com",
+                },
+                "tokenType": "bearer",
+                "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
+                "expiresIn": 3600,
+                "refreshToken": "da0fc43d172ed901466dc783a75697e39bd7302f"
             }
 
 
+# Group Status
+
+## Status endpoint [/status]
+With this endpoint your are able to know if the service is up and the name and version of the service.
+
+### Get Status [GET]
+
++ Response 200 (application/json)
+
+        {
+            name: "yapi",
+            version: "1.0.0-beta.3"
+        }
+
+
+# Group Location
+
+This service translate human addresses to geographic coordinates like latitude/longitude and vice versa. This helps to calculate the distance from a client to the stores nearby.
+
+## Translate Geographic Coordinates [/{cc}/location?location={LatLonPair}]
+
+This receives a geographic coordinate and try to return a human readable address.
+
++ Parameters
+    
+    <!-- Common parameters -->
+    + cc (required, string) - ISO 2 characters country code 
+    + location (required) - This is a geographic coordinate in the format "latitude,longitude", for example, location=19.454886,-99.1758911
+
+### Get  [GET]
+
++ Response 200 (application/json)
+
+        {
+            address: "Mar Mediterráneo 220, Nextitla, 11420 Ciudad de México, D.F., Mexico"
+        }
+
+## Translate Human Address [/{cc}/location?address={address}]
+
+Given a human readable address, returns a geographic coordinate.
+
++ Parameters
+    
+    <!-- Common parameters -->
+    + cc (required, string) - ISO 2 characters country code 
+    + address (required) - The street address that you want to translate, in the format used by the national postal service of the country concerned. Additional address elements such as business names and unit, suite or floor numbers should be avoided.
+
+### Get [GET]
+
++ Response 200 (application/json)
+
+        {
+            lat: 19.4099711,
+            lon: -99.1703208
+        }
+
+<!-- 
+# Group Companies
+
+All companies resources are located under the country code value path.
+A company must have at least one store. To get the collection of stores by company you can use the `stores` resource filtering by company.
+
+## Companies Collection [/{cc}/companies]
+The companies collection allows to get information for over companies that have stores subscribed to Ayalo. If a GET request is performed over the root companies resource you should get a collection of all the registered companies on a specific country.
+
++ Parameters
+    + cc (required, string) - ISO 2 characters country code
+
+### Get available companies [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id":986,
+                "slug":"best-buy",
+                "name":"Best Buy",
+                "links": {
+                    "self": "http://api.ayalo.co/v1/mx/companies/best-buy"
+                },
+                "title":"Best Buy - Mexico",
+                "logo": {
+                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
+                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
+                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
+                },
+                "description": "Compañía que ofrece productos electronicos",
+                "phone":"5374-0108",
+                "active": true,
+                "sell_online": true,
+                "url": "httpd://www.bestbuy.mx/",
+                "chat_rating": 4.4,
+                "tags": [
+                    "cargador-apple",
+                    "video-juegos",
+                    "televisores"
+                ],
+                "country": {
+                    "code":"mx",
+                    "name":"Mexico",
+                    "url": "http:/api.ayalo.co/v1/countries/mx"
+                },
+                "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
+            },
+            {
+                "id":786,
+                "slug":"walmart",
+                "name":"Walmart",
+                "links": {
+                    "self": "http://api.ayalo.co/v1/mx/companies/walmart",
+                    "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:walmart"
+                },
+                "title":"Walmart - Mexico",
+                "logo": {
+                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-small.png",
+                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-medium.png",
+                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-large.png"
+                },
+                "description": "Biggest retail corporation in the world.",
+                "phone":"9875-4567",
+                "active": true,
+                "sell_online": false,
+                "url": "http://www.walmart.mx",
+                "chat_rating": 4.3,
+                "tags": [
+                    "alimento",
+                    "articulo-limpieza",
+                    "refrezco"
+                ],
+                "country": {
+                    "code":"mx",
+                    "name":"Mexico",
+                    "links": {
+                        "self": "http:/api.ayalo.co/v1/countries/mx"
+                    }
+                }
+            }
+        ]
+
+## Company [/{cc}/companies/{company_slug}]
+Retrieve a company data
+
++ Parameters
+    + cc (required, string) - ISO 2 characters country code
+    + company_slug (required) - A company slug
+
+### Get company [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id":986,
+            "slug":"best-buy",
+            "name":"Best Buy",
+            "self":"http://api.ayalo.co/v1/mx/companies/best-buy",
+            "title":"Best Buy - Mexico",
+            "logo": {
+              "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
+              "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
+              "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
+            },
+            "description": "Compañía que ofrece productos electronicos",
+            "phone":"5374-0108",
+            "active": true,
+            "sell_online": true,
+            "url": "httpd://www.bestbuy.mx/",
+            "chat_rating": 4.4,
+            "tags": [
+                "cargador-apple",
+                "video-juegos",
+                "televisores"
+            ],
+            "country": {
+                "code":"mx",
+                "name":"Mexico",
+                "links": {
+                    "self": "http:/api.ayalo.co/v1/countries/mx"
+                }
+            },
+            "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
+        } -->
+
+<!-- 
 # yAPI Query collection
 
 # Group Root resource operations
@@ -437,190 +614,7 @@ _Example_
 * can be used to load all stored fields from nested resource attribute.
 
 * `/gt/products?q=sony&fiels=name,description,category.*` _Get the name, description and all category fields for all products with the word "sony"_
-* `/gt/stores/df/satelite?fiels=slug,name,description,company.name,company.description` _Get the name, description and all category fields for all products with the word "sony"_
-
-<!---
-## Aggregations WIP
-An aggregation can be seen as a unit-of-work that builds analytic information over a set of documents.
-
-## Embedding resources WIP
-An aggregation can be seen as a unit-of-work that builds analytic information over a set of documents.
-
-## Pagination WIP
-An aggregation can be seen as a unit-of-work that builds analytic information over a set of documents.
--->
-
-<!-- 
-# Group Status
-
-## Status endpoint [/status]
-With this endpoint your are able to know if all the services needed to run the API are working properly.
-
-### Get Status [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "country": "gt",
-                "query-service":"OK",
-                "polices-service":"OK",
-                "auth-service":"OK"
-            },
-            {
-                "country": "mx",
-                "query-service":"OK",
-                "polices-service":"OK",
-                "auth-service":"OK"
-            }
-        ] -->
-
-
-# Group Location
-
-This service translate human addresses to geographic coordinates like latitude/longitude, this helps to calculate the distance from a client to the stores nearby using resources like `stores`.
-
-## Geographic coordinates [/{cc}/location?q={address}]
-
-Given an address, returns a pair or latitude/longitude coordinates.
-
-+ Parameters
-    
-    <!-- Common parameters -->
-    + cc (required, string) - ISO 2 characters country code 
-    + address (required) - The street address that you want to translate, in the format used by the national postal service of the country concerned. Additional address elements such as business names and unit, suite or floor numbers should be avoided.
-
-### Get latitude/longitude [GET]
-
-+ Response 200 (application/json)
-
-    [14.622362, -90.514406]
-
-<!-- 
-# Group Companies
-
-All companies resources are located under the country code value path.
-A company must have at least one store. To get the collection of stores by company you can use the `stores` resource filtering by company.
-
-## Companies Collection [/{cc}/companies]
-The companies collection allows to get information for over companies that have stores subscribed to Ayalo. If a GET request is performed over the root companies resource you should get a collection of all the registered companies on a specific country.
-
-+ Parameters
-    + cc (required, string) - ISO 2 characters country code
-
-### Get available companies [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "id":986,
-                "slug":"best-buy",
-                "name":"Best Buy",
-                "links": {
-                    "self": "http://api.ayalo.co/v1/mx/companies/best-buy"
-                },
-                "title":"Best Buy - Mexico",
-                "logo": {
-                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
-                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
-                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
-                },
-                "description": "Compañía que ofrece productos electronicos",
-                "phone":"5374-0108",
-                "active": true,
-                "sell_online": true,
-                "url": "httpd://www.bestbuy.mx/",
-                "chat_rating": 4.4,
-                "tags": [
-                    "cargador-apple",
-                    "video-juegos",
-                    "televisores"
-                ],
-                "country": {
-                    "code":"mx",
-                    "name":"Mexico",
-                    "url": "http:/api.ayalo.co/v1/countries/mx"
-                },
-                "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
-            },
-            {
-                "id":786,
-                "slug":"walmart",
-                "name":"Walmart",
-                "links": {
-                    "self": "http://api.ayalo.co/v1/mx/companies/walmart",
-                    "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:walmart"
-                },
-                "title":"Walmart - Mexico",
-                "logo": {
-                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-small.png",
-                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-medium.png",
-                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-large.png"
-                },
-                "description": "Biggest retail corporation in the world.",
-                "phone":"9875-4567",
-                "active": true,
-                "sell_online": false,
-                "url": "http://www.walmart.mx",
-                "chat_rating": 4.3,
-                "tags": [
-                    "alimento",
-                    "articulo-limpieza",
-                    "refrezco"
-                ],
-                "country": {
-                    "code":"mx",
-                    "name":"Mexico",
-                    "links": {
-                        "self": "http:/api.ayalo.co/v1/countries/mx"
-                    }
-                }
-            }
-        ]
-
-## Company [/{cc}/companies/{company_slug}]
-Retrieve a company data
-
-+ Parameters
-    + cc (required, string) - ISO 2 characters country code
-    + company_slug (required) - A company slug
-
-### Get company [GET]
-
-+ Response 200 (application/json)
-
-        {
-            "id":986,
-            "slug":"best-buy",
-            "name":"Best Buy",
-            "self":"http://api.ayalo.co/v1/mx/companies/best-buy",
-            "title":"Best Buy - Mexico",
-            "logo": {
-              "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
-              "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
-              "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
-            },
-            "description": "Compañía que ofrece productos electronicos",
-            "phone":"5374-0108",
-            "active": true,
-            "sell_online": true,
-            "url": "httpd://www.bestbuy.mx/",
-            "chat_rating": 4.4,
-            "tags": [
-                "cargador-apple",
-                "video-juegos",
-                "televisores"
-            ],
-            "country": {
-                "code":"mx",
-                "name":"Mexico",
-                "links": {
-                    "self": "http:/api.ayalo.co/v1/countries/mx"
-                }
-            },
-            "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
-        } -->
+* `/gt/stores/df/satelite?fiels=slug,name,description,company.name,company.description` _Get the name, description and all category fields for all products with the word "sony"_ -->
 
 
 # Group Categories
@@ -633,6 +627,7 @@ The categories collection allows to get all the available categories in a given 
     
     <!-- Common parameters -->
     + cc (required, string) - ISO 2 characters country code 
+    + location (optional) - This is a geographic coordinate in the format "latitude,longitude", works like a filter to show only the categories that have stores near the given geographic coordinate.
 
 ### Get Categories [GET]
 
@@ -641,87 +636,56 @@ The categories collection allows to get all the available categories in a given 
         {
             "total": 2,
             "_links": {
-                "self": {"href":"http://api.ayalo.co/v1/mx/categories"}
+                "self": {"href":"http://api.yalochat.com/mx/categories?location=19.414980271831,-99.177446197718"}
             },
             "_embedded": {
                 "categories": [
                     {
-                        "id": "electronicos" ,
-                        "name": "Electronicos",
-                        "photo": "http://img.ayalo.co/electronicos.png",
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/v1/mx/categories/electronicos"}
+                        "id": "restaurantes" ,
+                        "name": "Restaurantes",
+                        images: {
+                            logo: "https://storage.googleapis.com/yalo-img/categories/logo_restaurantes.png",
+                            icon: "https://storage.googleapis.com/yalo-img/categories/icon_restaurantes.png",
+                            pin: "https://storage.googleapis.com/yalo-img/categories/pin_restaurantes.png",
+                            photo: "https://storage.googleapis.com/yalo-img/categories/cat_restaurantes.jpg"
+                        },
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/categories/restaurantes?location=19.414980271831,-99.177446197718"
+                            },
+                            stores: {
+                                href: "http://api.yalochat.com/mx/stores?location=19.414980271831,-99.177446197718&category=restaurantes"
+                            }
                         },
                         "_embedded": {
                             "stores": {
-                                "total": 3,
-                                "_links": {"href":"http://api.yalo.co/v1/mx/stores"},
-                                "_embedded": {
-                                    "stores":[{
-                                        "id": "best-buy-satelite",
-                                        "name": "Best Buy Satelite",
-                                        "description": "Compañía que ofrece productos electronicos",
-                                        "logo": "http://yalo.co/logo-best-buy.png"
-                                    },{
-                                        "id": "walmart-satelite",
-                                        "name": "Walmart Satelite",
-                                        "description": "Cadena de supermercados mas grande del mundo",
-                                        "logo": "http://yalo.co/walmart-buy.png"
-                                    }]
-                                }    
+                                "total": 121
                             }
                         }
                     },{
-                        "id": "farmacia" ,
-                        "name": "Farmacia",
-                        "photo": "http://img.ayalo.co/farmacia.png",
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/v1/mx/categories/farmacia"}
+                        id: "cafes",
+                        name: "Cafes",
+                        images: {
+                            logo: "https://storage.googleapis.com/yalo-img/categories/logo_bebidas.png",
+                            icon: "https://storage.googleapis.com/yalo-img/categories/icon_cafes.png",
+                            pin: "https://storage.googleapis.com/yalo-img/categories/pin_cafes.png",
+                            photo: "https://storage.googleapis.com/yalo-img/categories/cat_cafes.jpg"
                         },
-                        "_embedded": {
-                            "stores": {
-                                "total": 3,
-                                "_links": {"href":"http://api.yalo.co/v1/mx/stores"},
-                                "_embedded": {
-                                    "stores":[{
-                                        "id": "walmart-satelite",
-                                        "name": "Walmart Satelite",
-                                        "description": "Cadena de supermercados mas grande del mundo",
-                                        "logo": "http://yalo.co/walmart-buy.png"
-                                    }]
-                                }    
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/categories/cafes?location=19.414980271831,-99.177446197718"
+                            },
+                            stores: {
+                                href: "http://api.yalochat.com/mx/stores?location=19.414980271831,-99.177446197718&category=cafes"
+                            }
+                        },
+                        _embedded: {
+                            stores: {
+                                total: 33
                             }
                         }
                     }
                 ]
-            }
-        }
-
-
-## Category [/{cc}/categories/{categoryId}]
-To get details of a specific category just provide the category id.
-
-+ Parameters
-    
-    <!-- Common parameters -->
-    + cc (required, string) - ISO 2 characters country code 
-    + categoryId: `electronicos` (required, string) - The category id is unique identifier
-
-### Get Category [GET]
-
-+ Response 200 (application/hal+json)
-
-        {
-            "id": "electronicos" ,
-            "name": "Electronicos",
-            "photo": "http://img.ayalo.co/electronicos.png",
-            "_links": {
-                "self": {"href":"http://api.yalo.co/v1/mx/categories/electronicos"}
-            },
-            "_embedded": {
-                "stores": {
-                    "_links": {"href":"http://api.yalo.co/v1/mx/stores"}
-                }
             }
         }
 
@@ -729,279 +693,493 @@ To get details of a specific category just provide the category id.
 # Group Stores
 All stores resources are located under the country code value path.
 
-## Stores Collection [/{cc}/stores]
+## Stores Collection [/{cc}/stores{?location,category}]
 The stores collection allow to get information for over physical stores subscribed to Yalo. If a GET request is performed over the root stores resource you should get a collection of all the registered stores on a specific country.
 
 + Parameters
     
     <!-- Common parameters -->
     + cc (required, string) - ISO 2 characters country code 
+    + location (optional) - This is a geographic coordinate in the format "latitude,longitude", works like a filter to show only the stores that are near the given geographic coordinate.
+    + category (optional) - This has to be a valid category ID, it returns stores of the given category.
 
 ### Get Stores [GET]
 
 + Response 200 (application/hal+json)
 
         {
-            "total": 2,
-            "_links": {
-                "self": {"href":"http://api.ayalo.co/mx/stores?category=electronicos&location=19.433103,-99.181750"}
+            total: 113,
+            _links: {
+                self: {
+                    href: "http://api.yalochat.com/mx/stores?location=19.423344,-99.132821"
+                }
             },
-            "_embedded": {
-                "stores": [
+            _embedded: {
+                stores: [
                     {
-                        "id": "best-buy-satelite",
-                        "name": "Best Buy Satelite",
-                        "title": "Best Buy - DF - Satelite",
-                        "description": "Compañía que ofrece productos electronicos",
-                        "url": "http://www.bestbuy.mx/",
-                        "logo": "http://tools.ayalo.co/210602_elektra-logo.jpg",
-                        "photos": {
-                            "listing":{
-                                "big": "https://yaloquiero.mx/img/temp/stores_01.png",
-                                "small": "https://yaloquiero.mx/img/temp/stores_01.png"
+                        name: "Cocina Economica Los Antojitos",
+                        title: "Cocina Economica Los Antojitos - DF - IZTAPALAPA",
+                        description: "",
+                        url: "",
+                        logo: "",
+                        photos: {
+                            listing: {
+                                big: "",
+                                small: ""
                             },
-                            "profile": {
-                                "big": "https://yaloquiero.mx/img/temp/storeprofile_01.png",
-                                "small": "https://yaloquiero.mx/img/temp/storeprofile_01.png"
+                            profile: {
+                                big: "",
+                                small: ""
                             }
                         },
-                        "location": {
-                            "distance": 250,
-                            "lat" : 19.435211,
-                            "lon" : -99.185434
+                        location: {
+                            lat: 19.42374,
+                            lon: -99.132721,
+                            distance: 45.47
                         },
-                        "address": {
-                            "formatted": "Circuito Centro Comercial #2251 CD. Satelite Local 22 Segundo Nivel",
-                            "region": {
-                                "id":"df",
-                                "name":"Distrito Federal"
+                        address: {
+                            formatted: "FRAY SERVANDO TERESA DE MIER 142 B2",
+                            region: {
+                                name: "Distrito Federal",
+                                id: "distrito-federal",
+                                slug: "distrito-federal"
                             },
-                            "city": {
-                                "id":"satelite",
-                                "name":"Ciudad Satelite"
+                            city: {
+                                name: "IZTAPALAPA",
+                                id: "distrito-federal_iztapalapa",
+                                slug: "iztapalapa"
                             },
-                            "country": {
-                                "id":"mx",
-                                "name":"Mexico"
+                            country: {
+                                name: "México",
+                                id: "mx"
                             },
-                            "postal_code": "12345"
+                            postalCode: "09890",
+                            zone: {
+                                id: "distrito-federal_iztapalapa_benito-juarez",
+                                slug: "benito-juarez",
+                                name: "BENITO JUAREZ"
+                            }
                         },
-                        "verified": true,
-                        "financing": "Financing description",
-                        "rating": 4.7,
-                        "chat_rating": 4.1,
-                        "amenities": [
-                            "credit_card",
-                            "take_out",
-                            "parking"
+                        verified: false,
+                        financing: "",
+                        rating: 0,
+                        chatRating: 0,
+                        amenities: [
+                        "Comida Para Llevar",
+                        "Promociones",
+                        "Entrega A Domicilio",
+                        "Desayunos",
+                        "Servicio De Banquetes",
+                        "Facilidades Para Personas Discapacitadas"
                         ],
-                        "schedule": [{
-                            "days": [
-                                1,
-                                3,
-                                5
-                            ],
-                            "hours": [
-                                ["0800", "1300"],
-                                ["1400", "2000"]
-                            ]
-                        }],
-                        "tags": [
-                            "cargador-apple",
-                            "video-juegos",
-                            "televisores"
+                        schedule: [
+                            {
+                                days: [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    7
+                                ],
+                                hours: [
+                                    [
+                                        "0800",
+                                        "1800"
+                                    ]
+                                ]
+                            }
                         ],
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/mx/stores/best-buy-satelite"}
+                        tags: [
+                            ""
+                        ],
+                        timezone: "America/Mexico_City",
+                        operators: [
+                            "service@yalochat.com",
+                            "cocina-economica-los-antojitos.mx"
+                        ],
+                        id: "cocina-economica-los-antojitos",
+                        isOpen: true,
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/stores/cocina-economica-los-antojitos?location=19.423344,-99.132821"
+                            }
                         },
-                        "_embedded": {
-                            "categories": [{
-                                "id": "electronicos" ,
-                                "name": "Electronicos",
-                                "photo": "https://yaloquiero.mx/img/temp/storeprofile_01.png",
-                                "_links": {
-                                    "self": {"href":"http://api.yalo.co/mx/categories/electronicos"}
+                        _embedded: {
+                            categories: [
+                                {
+                                    id: "restaurantes",
+                                    name: "Restaurantes",
+                                    images: {
+                                        logo: "https://storage.googleapis.com/yalo-img/categories/logo_restaurantes.png",
+                                        icon: "https://storage.googleapis.com/yalo-img/categories/icon_restaurantes.png",
+                                        pin: "https://storage.googleapis.com/yalo-img/categories/pin_restaurantes.png",
+                                        photo: "https://storage.googleapis.com/yalo-img/categories/cat_restaurantes.jpg"
+                                    }
                                 }
-                            }]
+                            ]
                         }
                     },
                     {
-                        "id": "walmart-satelite",
-                        "name": "Walmart satelite",
-                        "title": "Walmart - DF - Satelite",
-                        "description": "Cadena de supermercados mas grande del mundo",
-                        "url": "http://www.walmart.mx/",
-                        "logo": "http://tools.ayalo.co/210602_walmart.jpg",
-                        "photos": {
-                            "listing":{
-                                "big": "https://yaloquiero.mx/img/temp/stores_02.png",
-                                "small": "https://yaloquiero.mx/img/temp/stores_02.png"
+                        name: "Pizzas Betos",
+                        title: "Pizzas Betos - DF - MEXICO",
+                        description: "",
+                        url: "",
+                        logo: "http://graficos.menumania.com.mx/contentstore/43/1941043_V1-E57754018.jpg",
+                        photos: {
+                            listing: {
+                                big: "",
+                                small: ""
                             },
-                            "profile": {
-                                "big": "https://yaloquiero.mx/img/temp/storeprofile_02.png",
-                                "small": "https://yaloquiero.mx/img/temp/storeprofile_02.png"
+                            profile: {
+                                big: "",
+                                small: ""
                             }
                         },
-                        "location": {
-                            "distance": 375,
-                            "lat" : 19.441466,
-                            "lon" : -99.183322
+                        location: {
+                            lat: 19.424622,
+                            lon: -99.131605,
+                            distance: 196.38
                         },
-                        "address": {
-                            "formatted": "Camino San Juan de Aragón 516, Ciudad de México, DF‎",
-                            "region": {
-                                "id":"df",
-                                "name":"distrito federal"
+                        address: {
+                            formatted: "MIGUEL SCHULTZ 20 - B",
+                            region: {
+                                name: "Distrito Federal",
+                                id: "distrito-federal",
+                                slug: "distrito-federal"
                             },
-                            "city": {
-                                "id":"eduardo-molina",
-                                "name":"Eduardo Molina"
+                            city: {
+                                name: "MEXICO",
+                                id: "distrito-federal_mexico",
+                                slug: "mexico"
                             },
-                            "country": {
-                                "id":"mx",
-                                "name":"Mexico"
+                            country: {
+                                name: "México",
+                                id: "mx"
                             },
-                            "postal_code": "12345"
+                            postalCode: "06470",
+                            zone: {
+                                id: "distrito-federal_mexico_san-rafael",
+                                slug: "san-rafael",
+                                name: "SAN RAFAEL"
+                            }
                         },
-                        "verified": true,
-                        "financing": "financing description",
-                        "rating": 4.5,
-                        "chat_rating": 4.6,
-                        "amenities": [
-                            "credit_card",
-                            "take_out",
-                            "parking"
+                        verified: false,
+                        financing: "",
+                        rating: 0,
+                        chatRating: 0,
+                        amenities: [
+                            ""
                         ],
-                        "schedule": [{
-                            "days": [
-                                1,
-                                2,
-                                3,
-                                4,
-                                5
-                            ],
-                            "hours": [
-                                ["0800", "2200"]
+                        schedule: [
+                            {
+                                days: [
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    7
+                                ],
+                                hours: [
+                                    [
+                                        "0100",
+                                        "2200"
+                                    ]
+                                ]
+                            }
+                        ],
+                        tags: [
+                            ""
+                        ],
+                        timezone: "America/Mexico_City",
+                        operators: [
+                            "service@yalochat.com",
+                            "pizzas-betos.mx"
+                        ],
+                        id: "pizzas-betos",
+                        isOpen: true,
+                        _links: {
+                            self: {
+                                href: "http://api.yalochat.com/mx/stores/pizzas-betos?location=19.423344,-99.132821"
+                            }
+                        },
+                        _embedded: {
+                            categories: [
+                                {
+                                    id: "restaurantes",
+                                    name: "Restaurantes",
+                                    images: {
+                                        logo: "https://storage.googleapis.com/yalo-img/categories/logo_restaurantes.png",
+                                        icon: "https://storage.googleapis.com/yalo-img/categories/icon_restaurantes.png",
+                                        pin: "https://storage.googleapis.com/yalo-img/categories/pin_restaurantes.png",
+                                        photo: "https://storage.googleapis.com/yalo-img/categories/cat_restaurantes.jpg"
+                                    }
+                                }
                             ]
-                        }],
-                        "tags": [
-                            "cargador-apple",
-                            "video-juegos",
-                            "televisores"
-                        ],
-                        "_links": {
-                            "self": {"href":"http://api.yalo.co/mx/stores/walmart-satelite"}
-                        },
-                        "_embedded": {
-                            "categories": [{
-                                "id": "electronicos" ,
-                                "name": "electronicos",
-                                "photo": "https://yaloquiero.mx/img/temp/storeprofile_01.png",
-                                "_links": {
-                                    "self": {"href":"http://api.yalo.co/mx/categories/electronicos"}
-                                }
-                            },{
-                                "id": "farmacia" ,
-                                "name": "Farmacia",
-                                "photo": "https://yaloquiero.mx/img/temp/stores_03.png",
-                                "_links": {
-                                    "self": {"href":"http://api.yalo.co/mx/categories/farmacia"}
-                                }
-                            }]
                         }
                     }
                 ]
             }
         }
 
-## Store [/{cc}/stores/{storeId}]
-To get details of a specific Store you must provide the id of a store.
+## Store [/{cc}/stores/{storeId}{?location}]
+Given a valid store ID, this endpoint returns a json formatted response containing the store data.
 
 + Parameters
     :(cc parameter)[parameters.md countryCode:]
     + storeId: `best-buy-df-satelite` (required, string) - The store id is an unique store identifier
+    + location (optional) - This is a geographic coordinate in the format "latitude,longitude", if specified, the distance between the client(the given geographic coordinate) and the store is included in the response.
 
 ### Get Store [GET]
 
 + Response 200 (application/hal+json)
 
         {
-            "id": "best-buy-satelite",
-            "name": "Best Buy Satelite",
-            "title": "Best Buy - DF - Satelite",
-            "description": "Compañía que ofrece productos electronicos",
-            "url": "http://www.bestbuy.mx/",
-            "logo": "http://yalo.co/logo-best-buy.png",
-            "photos": {
-                "listing":{
-                    "big": "https://yaloquiero.mx/img/temp/stores_01.png",
-                    "small": "https://yaloquiero.mx/img/temp/stores_01.png"
+            name: "Pizza del Perro Negro",
+            title: "Pizza del Perro Negro",
+            description: "La Mejor Pizza, punto.",
+            url: "http://www.pizzadelperronegro.com/",
+            phone: "52 55 5533 9240",
+            logo: "",
+            photos: {
+                listing: {
+                    big: "https://irs2.4sqi.net/img/general/width960/36663692_91y9Q_lf_ng0rlSvKkZlch50txiOgxF6szpZFnGfuMY.jpg",
+                    small: "https://irs2.4sqi.net/img/general/width960/36663692_91y9Q_lf_ng0rlSvKkZlch50txiOgxF6szpZFnGfuMY.jpg"
                 },
-                "profile": {
-                    "big": "https://yaloquiero.mx/img/temp/storeprofile_01.png",
-                    "small": "https://yaloquiero.mx/img/temp/storeprofile_01.png"
+                profile: {
+                    big: "https://irs2.4sqi.net/img/general/width960/36663692_91y9Q_lf_ng0rlSvKkZlch50txiOgxF6szpZFnGfuMY.jpg",
+                    small: "https://irs2.4sqi.net/img/general/width960/36663692_91y9Q_lf_ng0rlSvKkZlch50txiOgxF6szpZFnGfuMY.jpg"
                 }
             },
-            "location": {
-                "distance": 250,
-                "lat" : 19.435211,
-                "lon" : -99.185434
+            location: {
+                lat: 19.416557,
+                lon: -99.169667,
+                distance: 3937
             },
-            "address": {
-                "formatted": "Circuito Centro Comercial #2251 CD. Satelite Local 22 Segundo Nivel",
-                "region": {
-                    "id":"df",
-                    "name":"Distrito Federal"
+            address: {
+                formatted: "Parque España 3, Roma Norte, 06700 Ciudad de México, Distrito Federal, México",
+                region: {
+                    id: "distrito-federal",
+                    name: "Distrito Federal",
+                    slug: "distrito-federal"
                 },
-                "city": {
-                    "id":"satelite",
-                    "name":"Ciudad Satelite"
+                city: {
+                    id: "distrito-federal_ciudad-de-mexico",
+                    name: "Ciudad de México",
+                    slug: "ciudad-de-mexico"
                 },
-                "country": {
-                    "id":"mx",
-                    "name":"Mexico"
+                country: {
+                    id: "mx",
+                    name: "México"
                 },
-                "postal_code": "12345"
+                postalCode: "06700",
+                zone: {
+                    id: "distrito-federal_ciudad-de-mexico_roma-norte",
+                    name: "Roma Norte",
+                    slug: "roma-norte"
+                },
+                verified: true
             },
-            "verified": true,
-            "financing": "Financing description",
-            "rating": 4.7,
-            "chat_rating": 4.1,
-            "amenities": [
-                "credit_card",
-                "take_out",
-                "parking"
+            verified: false,
+            financing: "",
+            rating: 0,
+            chatRating: 0,
+            amenities: [ ],
+            schedule: [
+                {
+                    days: [
+                        1,
+                        2,
+                        3,
+                        7
+                    ],
+                    hours: [
+                        [
+                            "1200",
+                            "0000"
+                        ]
+                    ]
+                },
+                {
+                    days: [
+                        4,
+                        5,
+                        6
+                    ],
+                    hours: [
+                        [
+                            "1200",
+                            "0100"
+                        ]
+                    ]
+                }
             ],
-            "schedule": [{
-                "days": [
-                    1,
-                    3,
-                    5
-                ],
-                "hours": [
-                    ["0800", "1300"],
-                    ["1400", "2000"]
-                ]
-            }],
-            "tags": [
-                "cargador-apple",
-                "video-juegos",
-                "televisores"
+            tags: [
+                "Pizza",
+                "Cerveza"
             ],
-            "_links": {
-                "self": {"href":"http://api.yalo.co/mx/stores/best-buy-satelite?location=19.433103,-99.181750"}
+            timezone: "America/Mexico_City",
+            operators: [
+                "service@yalochat.com",
+                "pizza-del-perro-negro.mx"
+            ],
+            id: "pizza-del-perro-negro",
+            _links: {
+                self: {
+                    href: "http://api.yalochat.com/mx/stores/pizza-del-perro-negro?location=19.423344,-99.132821"
+                }
             },
-            "_embedded": {
-                "categories": [{
-                    "id": "electronicos" ,
-                    "name": "Electronicos",
-                    "photo": "https://yaloquiero.mx/img/temp/storeprofile_01.png",
-                    "_links": {
-                        "self": {"href":"http://api.yalo.co/mx/categories/electronicos"}
+            isOpen: true,
+            _embedded: {
+                categories: [
+                    {
+                        id: "restaurantes",
+                        name: "Restaurantes",
+                        images: {
+                            logo: "https://storage.googleapis.com/yalo-img/categories/logo_restaurantes.png",
+                            icon: "https://storage.googleapis.com/yalo-img/categories/icon_restaurantes.png",
+                            pin: "https://storage.googleapis.com/yalo-img/categories/pin_restaurantes.png",
+                            photo: "https://storage.googleapis.com/yalo-img/categories/cat_restaurantes.jpg"
+                        }
                     }
-                }]
+                ]
             }
         }
+
+## Is Store Open? [/{cc}/stores/{storeId}/is-open]
+Given a valid store ID, this endpoint indicates if a store is open in the moment when the request is made.
+
++ Parameters
+    :(cc parameter)[parameters.md countryCode:]
+    + storeId: `best-buy-df-satelite` (required, string) - The store id is an unique store identifier
+
+### Is Open [GET]
+
++ Response 200 (application/hal+json)
+
+        {
+            id: "pizza-del-perro-negro",
+            isOpen: true,
+            _links: {
+                self: {
+                    href: "http://api.yalochat.com/mx/stores/pizza-del-perro-negro"
+                }
+            }
+        }
+
+
+# Group Search
+
+You can perform a basic search using the "q" query string parameter. The value of the "q" parameter is parsed into *terms* and *operators*.
+
+> The *"q"* parameter is only available in the **stores** and **categories** resources.
+
+A *term* can be a single word, or a phrase surrounded by double quotes -- "guatemalan good" -- which searches for all the words in the phrase, in the same order.
+
+With the *operators* you can customize your search. The available operators are the following.
+
+### Field Names
+
+It is possible to specify fields, like this:
+
+- where the status field contains "active"
+
+    ```
+    status:active
+    ```
+- where the title field contains quick or brown. If you omit the OR operator the default operator will be used
+
+    ```
+    title:(quick OR brown)
+    ```
+- where the author field contains the exact phrase "john smith"
+
+    ```
+    author:"John Smith"
+    ```
+- where the field title has no value (or is missing):
+
+    ```
+    _missing_:title
+    ```
+- where the field title has any non-null value:
+
+    ```
+    _exists_:title
+    ```
+
+### Ranges
+Ranges can be specified for date, numeric or string fields. Inclusive ranges are specified with square brackets [min TO max] and exclusive ranges with curly brackets {min TO max}.
+
+- All days in 2012:
+
+    ```
+    date:[2012-01-01 TO 2012-12-31]
+    ```
+- Numbers 1..5
+
+    ```
+    count:[1 TO 5]
+    ```
+- Tags between alpha and omega, excluding alpha and omega:
+
+    ```
+    tag:{alpha TO omega}
+    ```
+- Numbers from 10 upwards
+
+    ```
+    count:[10 TO *]
+    ```
+- Dates before 2012
+
+    ```
+    date:{* TO 2012-01-01}
+    ```
+- Curly and square brackets can be combined:
+
+    ```
+    count:[1 TO 5}
+    ```
+
+### Boolean operators
+By default, all terms are optional, as long as one term matches. A search for foo bar baz will find any document that contains one or more of foo or bar or baz. There are boolean operators which can be used in the query string itself to provide more control.
+
+The preferred operators are **+** (this term must be present) and **-** (this term must not be present). All other terms are optional. For example, this query:
+
+```
+quick brown +fox -news
+```
+
+states that:
+
+- fox must be present
+- news must not be present
+
+The familiar operators **AND**, **OR** and **NOT** (also written &&, || and !) are also supported. However, the effects of these operators can be more complicated than is obvious at first glance. **NOT** takes precedence over **AND**, which takes precedence over **OR**. While the + and - only affect the term to the right of the operator, **AND** and **OR** can affect the terms to the left and right.
+
+### Grouping
+Multiple terms or clauses can be grouped together with parentheses, to form sub-queries:
+
+```
+(quick OR brown) AND fox
+```
+
+Groups can be used to target a particular field, or to boost the result of a sub-query:
+
+```
+status:(active OR pending) title:(full text search)
+```
+
+### Reserved characters
+If you need to use any of the characters which function as operators in your query itself (and not as operators), then you should escape them with a leading backslash. For instance, to search for (1+1)=2, you would need to write your query as \(1\+1\)\=2.
+
+The reserved characters are: + - = && || > < ! ( ) { } [ ] ^ " ~ * ? : \ /
+
+> Failing to escape these special characters correctly could lead to a syntax error which prevents your query from running.
 
 <!-- 
 # Group Places

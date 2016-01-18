@@ -21,17 +21,19 @@ The API is based in the idea that each resource or collection is stored in a spe
 
 :[Group Authentication](groups/oauth.md)
 
-:[Query Collection](query_collection.md)
-
 :[Group Status](groups/status.md)
 
 :[Group Location](groups/location.md)
 
 <!-- :[Group Companies](groups/companies.md) -->
 
+<!-- :[Query Collection](query_collection.md) -->
+
 :[Group Stores](groups/categories.md)
 
 :[Group Stores](groups/stores.md)
+
+:[Group Search](groups/resources_common_params.md)
 
 <!-- :[Group Places](groups/places.md) -->
 
