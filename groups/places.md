@@ -41,7 +41,7 @@ Get data about a coutry.
 
         {
             "code": "gt",
-            "self": "http:/api.ayalo.co/v1/countries/gt"
+            "self": "http:/api.yalochat.com/countries/gt"
             "name": "Guatemala",
             "cities": "123"
         }

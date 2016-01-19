@@ -20,13 +20,13 @@ The companies collection allows to get information for over companies that have 
                 "slug":"best-buy",
                 "name":"Best Buy",
                 "links": {
-                    "self": "http://api.ayalo.co/v1/mx/companies/best-buy"
+                    "self": "http://api.yalochat.com/mx/companies/best-buy"
                 },
                 "title":"Best Buy - Mexico",
                 "logo": {
-                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
-                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
-                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
+                  "small": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-small.png",
+                  "medium": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-medium.png",
+                  "large": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-large.png"
                 },
                 "description": "Compañía que ofrece productos electronicos",
                 "phone":"5374-0108",
@@ -42,23 +42,23 @@ The companies collection allows to get information for over companies that have 
                 "country": {
                     "code":"mx",
                     "name":"Mexico",
-                    "url": "http:/api.ayalo.co/v1/countries/mx"
+                    "url": "http:/api.yalochat.com/countries/mx"
                 },
-                "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
+                "stores": "http:/api.yalochat.com/mx/stores?q=company:best-buy"
             },
             {
                 "id":786,
                 "slug":"walmart",
                 "name":"Walmart",
                 "links": {
-                    "self": "http://api.ayalo.co/v1/mx/companies/walmart",
-                    "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:walmart"
+                    "self": "http://api.yalochat.com/mx/companies/walmart",
+                    "stores": "http:/api.yalochat.com/mx/stores?q=company:walmart"
                 },
                 "title":"Walmart - Mexico",
                 "logo": {
-                  "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-small.png",
-                  "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-medium.png",
-                  "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/walmart-large.png"
+                  "small": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/walmart-small.png",
+                  "medium": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/walmart-medium.png",
+                  "large": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/walmart-large.png"
                 },
                 "description": "Biggest retail corporation in the world.",
                 "phone":"9875-4567",
@@ -75,7 +75,7 @@ The companies collection allows to get information for over companies that have 
                     "code":"mx",
                     "name":"Mexico",
                     "links": {
-                        "self": "http:/api.ayalo.co/v1/countries/mx"
+                        "self": "http:/api.yalochat.com/countries/mx"
                     }
                 }
             }
@@ -96,12 +96,12 @@ Retrieve a company data
             "id":986,
             "slug":"best-buy",
             "name":"Best Buy",
-            "self":"http://api.ayalo.co/v1/mx/companies/best-buy",
+            "self":"http://api.yalochat.com/mx/companies/best-buy",
             "title":"Best Buy - Mexico",
             "logo": {
-              "small": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-small.png",
-              "medium": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-medium.png",
-              "large": "https://s3.amazonaws.com/assets.ayalo.co/mx/logos/best-buy-large.png"
+              "small": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-small.png",
+              "medium": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-medium.png",
+              "large": "https://s3.amazonaws.com/assets.yalochat.com/mx/logos/best-buy-large.png"
             },
             "description": "Compañía que ofrece productos electronicos",
             "phone":"5374-0108",
@@ -118,8 +118,8 @@ Retrieve a company data
                 "code":"mx",
                 "name":"Mexico",
                 "links": {
-                    "self": "http:/api.ayalo.co/v1/countries/mx"
+                    "self": "http:/api.yalochat.com/countries/mx"
                 }
             },
-            "stores": "http:/api.ayalo.co/v1/mx/stores?q=company:best-buy"
+            "stores": "http:/api.yalochat.com/mx/stores?q=company:best-buy"
         }

@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://api.ayalo.co/v1
+HOST: http://api.yalochat.com/
 
 # Yalo Query Base yAPI
 
@@ -33,7 +33,7 @@ The API is based in the idea that each resource or collection is stored in a spe
 
 :[Group Stores](groups/stores.md)
 
-:[Group Search](groups/resources_common_params.md)
+:[Group Search](groups/search.md)
 
 <!-- :[Group Places](groups/places.md) -->
 

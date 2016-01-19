@@ -90,7 +90,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             {
                 "statusCode": 201,
                 "user": {
-                    "email": "fabia@ayalo.com"
+                    "email": "fabia@yalochat.com"
                 },
                 "type": "bearer",
                 "token": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
@@ -124,7 +124,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             {
                 "statusCode": 200,
                 "user": {
-                    "email": "fred@ayalo.co"
+                    "email": "fred@yalochat.com"
                 },
                 "type": "bearer",
                 "token": "56f5ba105c3bc1cd132f91daee538011a2ccd6cb",
@@ -162,7 +162,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             {
                 "statusCode": 200,
                 "user": {
-                    "email": "fred@ayalo.co"
+                    "email": "fred@yalochat.com"
                 },
                 "type": "bearer",
                 "token": "8fb3484d8b7f2dfaca53f653a605ec9cd9316723",
@@ -198,7 +198,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
 
             {
                 "user": {
-                    "email": "fabia@ayalo.com"
+                    "email": "fabia@yalochat.comm"
                 },
                 "tokenType": "bearer",
                 "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
@@ -269,7 +269,7 @@ To signup new a user you can use the same endpoint for user signing. The only di
             {
                 "statusCode": 201,
                 "user": {
-                    "email": "fabia@ayalo.com",
+                    "email": "fabia@yalochat.com",
                 },
                 "tokenType": "bearer",
                 "accessToken": "c3d1973e5ca12eb80d5132283ebd850ede34ae17",
